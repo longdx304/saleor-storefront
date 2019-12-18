@@ -2,6 +2,7 @@ import React from "react";
 
 import { useUserDetails } from "@sdk/react";
 
+import { Trans } from "@lingui/react";
 import { CheckoutContext } from "../../checkout/context";
 import { TypedCreateCheckoutMutation } from "../../checkout/queries";
 import { CartLine } from "../CartProvider/context";
@@ -40,7 +41,7 @@ const AddToCart: React.FC<{
               }}
               disabled={disabled || mutationLoading || checkoutLoading}
             >
-              Add to basket
+              <Trans id="Add to basket" />
             </AddToCartButton>
           )}
         </TypedCreateCheckoutMutation>

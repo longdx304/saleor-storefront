@@ -4,7 +4,7 @@ import React from "react";
 import { I18nContext } from ".";
 import { IProps } from "./types";
 
-const fallbackLanguage = "en";
+const fallbackLanguage = "vi";
 
 const getLangCode = (code: string) =>
   code.includes("-") ? code.split("-")[0] : code;
