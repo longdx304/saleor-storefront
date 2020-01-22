@@ -4,13 +4,13 @@ import * as React from "react";
 
 import { Button, Form, TextField } from "../..";
 import { maybe } from "../../../core/utils";
-import { TypedCustomerRegisterMutation } from "./queries";
-import { RegisterCutomer } from "./types/RegisterCutomer";
+import { TypedAccountRegisterMutation } from "./queries";
+import { RegisterAccount } from "./types/RegisterAccount";
 
 import { AlertManager, useAlert } from "react-alert";
 
 const showSuccessNotification = (
-  data: RegisterCutomer,
+  data: RegisterAccount,
   hide: () => void,
   alert: AlertManager
 ) => {
@@ -20,9 +20,11 @@ const showSuccessNotification = (
     hide();
     alert.show(
       {
-        title: "New user has been created",
+        title: data.accountRegister.requiresConfirmation
+        ? "Please check your e-mail for further instructions"
+        : "New user has been created",
       },
-      { type: "success" }
+      { type: "success", timeout: 5000 }
     );
   }
 };
@@ -30,7 +32,7 @@ const showSuccessNotification = (
 const RegisterForm: React.FC<{ hide: () => void }> = ({ hide }) => {
   const alert = useAlert();
   return (
-    <TypedCustomerRegisterMutation
+    <TypedAccountRegisterMutation
       onCompleted={data => showSuccessNotification(data, hide, alert)}
     >
       {(registerCustomer, { loading, data }) => {
@@ -39,7 +41,8 @@ const RegisterForm: React.FC<{ hide: () => void }> = ({ hide }) => {
             errors={maybe(() => data.accountRegister.errors, [])}
             onSubmit={(event, { email, password }) => {
               event.preventDefault();
-              registerCustomer({ variables: { email, password } });
+              const redirectUrl = window.location.origin;
+              registerCustomer({ variables: { email, password, redirectUrl } });
             }}
           >
             <TextField
@@ -64,7 +67,7 @@ const RegisterForm: React.FC<{ hide: () => void }> = ({ hide }) => {
           </Form>
         );
       }}
-    </TypedCustomerRegisterMutation>
+    </TypedAccountRegisterMutation>
   );
 };
 
