@@ -108,9 +108,6 @@ export const checkoutFragment = gql`
     }
     token
     id
-    user {
-      email
-    }
     totalPrice {
       ...Price
     }
@@ -136,5 +133,13 @@ export const checkoutFragment = gql`
     lines {
       ...CheckoutLine
     }
+    isShippingRequired
+    discount {
+      currency
+      amount
+    }
+    discountName
+    translatedDiscountName
+    voucherCode
   }
 `;

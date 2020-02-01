@@ -4,10 +4,14 @@ import { TypedMutation } from "../core/mutations";
 import { TypedQuery } from "../core/queries";
 import {
   createCheckout,
-  createCheckoutVariables
+  createCheckoutVariables,
 } from "./types/createCheckout";
 import { getCheckout, getCheckoutVariables } from "./types/getCheckout";
 import { getUserCheckout } from "./types/getUserCheckout";
+import {
+  getVariantsProducts,
+  getVariantsProductsVariables,
+} from "./types/getVariantsProducts";
 
 export const checkoutAddressFragment = gql`
   fragment Address on Address {
@@ -114,9 +118,6 @@ export const checkoutFragment = gql`
     }
     token
     id
-    user {
-      email
-    }
     totalPrice {
       ...Price
     }
@@ -142,6 +143,14 @@ export const checkoutFragment = gql`
     lines {
       ...CheckoutLine
     }
+    isShippingRequired
+    discount {
+      currency
+      amount
+    }
+    discountName
+    translatedDiscountName
+    voucherCode
   }
 `;
 
@@ -169,9 +178,13 @@ export const updateCheckoutLineQuery = gql`
         lines {
           ...CheckoutLine
         }
+        totalPrice {
+          ...Price
+        }
         subtotalPrice {
           ...Price
         }
+        isShippingRequired
       }
       errors {
         field
@@ -215,3 +228,26 @@ const getUserCheckoutQuery = gql`
 export const TypedGetUserCheckoutQuery = TypedQuery<getUserCheckout, {}>(
   getUserCheckoutQuery
 );
+
+export const getVariantsProductsQuery = gql`
+  query getVariantsProducts($ids: [ID]) {
+    productVariants(ids: $ids, first: 100) {
+      edges {
+        node {
+          id
+          product {
+            id
+            productType {
+              isShippingRequired
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const TypedGetVariantsProductsQuery = TypedQuery<
+  getVariantsProducts,
+  getVariantsProductsVariables
+>(getVariantsProductsQuery);

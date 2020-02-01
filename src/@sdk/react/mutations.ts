@@ -16,7 +16,16 @@ export const useUpdateCheckoutBillingAddress = mutationFactory(
 export const useUpdateCheckoutShippingAddress = mutationFactory(
   "setCheckoutShippingAddress"
 );
+export const useAddCheckoutPromoCode = mutationFactory(
+  "setAddCheckoutPromoCode"
+);
+
+export const useRemoveCheckoutPromoCode = mutationFactory(
+  "setRemoveCheckoutPromoCode"
+);
 
 // User mutations
 export const usePasswordChange = mutationFactory("setPasswordChange");
 export const useAccountUpdate = mutationFactory("setAccountUpdate");
+
+export const useSetPassword = mutationFactory("setPassword");

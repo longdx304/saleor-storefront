@@ -9,6 +9,7 @@
   "dependencies": {
     "@babel/runtime": "^7.5.5",
     "@lingui/react": "^2.8.3",
+    "@types/yup": "^0.26.27",
     "apollo": "^2.21.3",
     "apollo-cache-inmemory": "^1.5.1",
     "apollo-cache-persist": "^0.1.1",
@@ -27,8 +28,8 @@
     "dompurify": "^2.0.7",
     "draftjs-to-html": "^0.8.4",
     "formik": "^1.5.7",
-    "graphql": "^14.0.2",
-    "graphql-tag": "^2.9.2",
+    "graphql": "^14.5.8",
+    "graphql-tag": "^2.10.1",
     "history": "^4.7.2",
     "isomorphic-fetch": "^2.2.1",
     "js-base64": "^2.4.8",
@@ -50,7 +51,8 @@
     "styled-components": "^4.3.0",
     "typeface-montserrat": "0.0.54",
     "url-join": "^4.0.0",
-    "use-query-params": "^0.4.1"
+    "use-query-params": "^0.4.1",
+    "yup": "^0.28.0"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
@@ -120,7 +122,7 @@
     "jest-svg-transformer": "^1.0.0",
     "mini-css-extract-plugin": "^0.4.1",
     "node-fetch": "^2.6.0",
-    "node-sass": "^4.12.0",
+    "node-sass": "^4.13.1",
     "plop": "^2.5.3",
     "postcss": "^7.0.1",
     "postcss-loader": "^2.1.6",

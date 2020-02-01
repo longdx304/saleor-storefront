@@ -2,7 +2,7 @@
 /* eslint-disable */
 // This file was automatically generated and should not be edited.
 
-import { CheckoutLineInput } from "./../../types/globalTypes";
+import { CheckoutLineInput } from "./../../../../types/globalTypes";
 
 // ====================================================
 // GraphQL mutation operation: UpdateCheckoutLine
@@ -225,6 +225,50 @@ export interface UpdateCheckoutLine_checkoutLinesUpdate_checkout_lines {
   variant: UpdateCheckoutLine_checkoutLinesUpdate_checkout_lines_variant;
 }
 
+export interface UpdateCheckoutLine_checkoutLinesUpdate_checkout_totalPrice_gross {
+  __typename: "Money";
+  /**
+   * Amount of money.
+   */
+  amount: number;
+  /**
+   * Currency code.
+   */
+  currency: string;
+  /**
+   * Money formatted according to the current locale.
+   */
+  localized: string;
+}
+
+export interface UpdateCheckoutLine_checkoutLinesUpdate_checkout_totalPrice_net {
+  __typename: "Money";
+  /**
+   * Amount of money.
+   */
+  amount: number;
+  /**
+   * Currency code.
+   */
+  currency: string;
+  /**
+   * Money formatted according to the current locale.
+   */
+  localized: string;
+}
+
+export interface UpdateCheckoutLine_checkoutLinesUpdate_checkout_totalPrice {
+  __typename: "TaxedMoney";
+  /**
+   * Amount of money including taxes.
+   */
+  gross: UpdateCheckoutLine_checkoutLinesUpdate_checkout_totalPrice_gross;
+  /**
+   * Amount of money without taxes.
+   */
+  net: UpdateCheckoutLine_checkoutLinesUpdate_checkout_totalPrice_net;
+}
+
 export interface UpdateCheckoutLine_checkoutLinesUpdate_checkout_subtotalPrice_gross {
   __typename: "Money";
   /**
@@ -280,9 +324,17 @@ export interface UpdateCheckoutLine_checkoutLinesUpdate_checkout {
    */
   lines: (UpdateCheckoutLine_checkoutLinesUpdate_checkout_lines | null)[] | null;
   /**
+   * The sum of the the checkout line prices, with all the taxes,shipping costs, and discounts included.
+   */
+  totalPrice: UpdateCheckoutLine_checkoutLinesUpdate_checkout_totalPrice | null;
+  /**
    * The price of the checkout before shipping, with taxes included.
    */
   subtotalPrice: UpdateCheckoutLine_checkoutLinesUpdate_checkout_subtotalPrice | null;
+  /**
+   * Returns True, if checkout requires shipping.
+   */
+  isShippingRequired: boolean;
 }
 
 export interface UpdateCheckoutLine_checkoutLinesUpdate_errors {
